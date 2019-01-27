@@ -16,6 +16,29 @@ public class Board {
     
     private final int board[][] = new int[9][9];
     
+    public void printboard(){
+        for(int i = 0; i < MAXROWS; i++){
+            System.out.print(this.board[i][0] + "|" + this.board[i][1] + "|" + 
+                    this.board[i][2]+"|");
+            System.out.print(this.board[i][3] + "|" + this.board[i][4] + "|" + 
+                    this.board[i][5]+"|");
+            System.out.print(this.board[i][6] +"|" + this.board[i][7] + "|"  + 
+                    this.board[i][8]+"|");
+            System.out.println("Done");    
+        }
+            
+    }
+    
+    public void setBoard(int numbers[][]){
+        if(numbers.length ==9 && numbers[0].length == 9){
+            for(int i = 0; i < MAXROWS; i++){
+                for(int k = 0; k < MAXCOLS; k++){
+                    this.board[i][k] = numbers[i][k];
+                }
+            }
+        }
+    }
+    
     public boolean isWin(){
         boolean isWin;
         isWin = checkAllRowAndCol();
@@ -62,8 +85,9 @@ public class Board {
         while(i < MAXROWS && isWin){
             int totalCols = 0;
             int totalRows = 0;
+            k = 0;
             while(k < MAXCOLS && isWin){
-                totalCols = totalCols + this.board[i][k];
+                totalCols = totalCols + this.board[k][i];
                 totalRows = totalRows + this.board[i][k];
                 k++;
             }
