@@ -12,9 +12,18 @@ package sudokusolver;
 public class Board {
     final int MAXROWS = 9;
     final int MAXCOLS = 9;
-    final int winTotal = 45;
+    final int WINTOTAL = 45;
     
     private final int board[][] = new int[9][9];
+    
+    public boolean isWin(){
+        boolean isWin;
+        isWin = checkAllRowAndCol();
+        if(!isWin){
+            isWin = checkAllBoxes();
+        }
+        return isWin;
+    }
     
     //Check to see if all 9 boxes are coorect on the board
     public boolean checkAllBoxes(){
@@ -38,7 +47,7 @@ public class Board {
                 total = total + this.board[i][k];
                 k++;
             }
-            if (total != winTotal){
+            if (total != WINTOTAL){
                 isWin = false;
             }
             i++;
@@ -58,7 +67,7 @@ public class Board {
                 totalRows = totalRows + this.board[i][k];
                 k++;
             }
-            if(totalCols != winTotal || totalRows != winTotal){
+            if(totalCols != WINTOTAL || totalRows != WINTOTAL){
                 isWin = false; 
             }
             i++; 
