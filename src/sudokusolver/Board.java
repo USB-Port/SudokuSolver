@@ -42,7 +42,7 @@ public class Board {
     public boolean isWin(){
         boolean isWin;
         isWin = checkAllRowAndCol();
-        if(!isWin){
+        if(isWin){
             isWin = checkAllBoxes();
         }
         return isWin;
@@ -51,7 +51,7 @@ public class Board {
     //Check to see if all 9 boxes are coorect on the board
     public boolean checkAllBoxes(){
         boolean isWin = true;
-        int i = 0, k = 0, total = 0;
+        int i = 0, k = 0;
         while(i < MAXROWS && isWin){
             while(k < MAXROWS && isWin){
                 isWin = checkBox(i,k);
@@ -62,18 +62,19 @@ public class Board {
         return isWin;
     }
     
-    public boolean checkBox(int row, int col){ // call with params 0, 0
+    public boolean checkBox(int row, int col){ 
         boolean isWin = true;
-        int i = 0 + row, k = 0 + col, total = 0;
+        int i = 0 + row, total = 0;
         while(i < row + 3 && isWin){
+            int k = 0 + col;
             while(k < col + 3 && isWin){
                 total = total + this.board[i][k];
                 k++;
             }
-            if (total != WINTOTAL){
-                isWin = false;
-            }
             i++;
+        }
+        if (total != WINTOTAL){
+                isWin = false;
         }
      return isWin;
     }
@@ -97,6 +98,22 @@ public class Board {
             i++; 
         }
         return isWin;   
+    }
+    public int[][] solveRowandColForOneMissing(){
+        int num[][] = new int[9][9];
+        int i = 0, k = 0;
+        while(i < MAXROWS){
+            int totalCols = 0;
+            int totalRows = 0;
+            k = 0;
+            while(k < MAXCOLS){
+                totalCols = totalCols + this.board[k][i];
+                totalRows = totalRows + this.board[i][k];
+                k++;
+            }
+            i++; 
+        }
+        return num;
     }
       
     
